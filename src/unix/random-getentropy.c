@@ -19,6 +19,9 @@
  * IN THE SOFTWARE.
  */
 
+#if defined(__APPLE__) || defined(__OpenBSD__) || \
+     (defined(__ANDROID_API__) && __ANDROID_API__ >= 28)
+
 #include "uv.h"
 #include "internal.h"
 
@@ -55,3 +58,5 @@ int uv__random_getentropy(void* buf, size_t buflen) {
 
   return 0;
 }
+
+#endif
