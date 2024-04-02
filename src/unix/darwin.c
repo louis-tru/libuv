@@ -33,9 +33,9 @@
 #include <sys/sysctl.h>
 #include <unistd.h>  /* sysconf */
 
-#if !TARGET_OS_IPHONE
+// #if !TARGET_OS_IPHONE
 #include "darwin-stub.h"
-#endif
+// #endif
 
 static uv_once_t once = UV_ONCE_INIT;
 static uint64_t (*time_func)(void);
