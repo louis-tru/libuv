@@ -382,8 +382,6 @@ int uv_run(uv_loop_t* loop, uv_run_mode mode) {
     if ((mode == UV_RUN_ONCE && !ran_pending) || mode == UV_RUN_DEFAULT)
       timeout = uv_backend_timeout(loop);
 
-    // Perform a check first, so that a check can be executed immediately after the timer
-    uv__run_check(loop);
     uv__io_poll(loop, timeout);
 
     /* Run one final update on the provider_idle_time in case uv__io_poll
@@ -393,7 +391,7 @@ int uv_run(uv_loop_t* loop, uv_run_mode mode) {
      */
     uv__metrics_update_idle_time(loop);
 
-    // uv__run_check(loop);
+    uv__run_check(loop);
     uv__run_closing_handles(loop);
 
     if (mode == UV_RUN_ONCE) {
